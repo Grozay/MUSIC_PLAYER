@@ -217,26 +217,33 @@ const app = {
 
         playlist.onclick = function (e) {
             const songElement = e.target.closest('.song:not(.active)')
-            if (songElement || e.target.closest('.option')) {
+            const optionElement = e.target.closest('.option')
+            if (songElement || optionElement) {
                 if (songElement) {
-                    _this.currentIndex = songElement.dataset.index;
-                    _this.loadCurrentSong()
-                    audio.play()
-                    _this.render()
-                    $$('.song').forEach((song) => {
-                        const shouldBeActive = (_this.currentIndex == song.dataset.index);
-                        song.classList.toggle("active", shouldBeActive);
-                        console.log(shouldBeActive)
-                    });
+                    setTimeout(function () {
+                        _this.currentIndex = songElement.dataset.index;
+                        _this.loadCurrentSong()
+                        audio.play()
+                        _this.render()
+                        $$('.song').forEach((song) => {
+                            const shouldBeActive = (_this.currentIndex == song.dataset.index);
+                            song.classList.toggle("active", shouldBeActive);
+                        });
+                    }, 100)
+                    if (optionElement) {
+                        console.log(optionElement)
 
+                    }
                 }
             }
         }
     },
+
     loadConfig: function () {
         this.isRandom = this.config.isRandom
         this.isRepeat = this.config.isRepeat
     },
+
     nextSong: function () {
         this.currentIndex++
         if (this.currentIndex >= this.songs.length) {
@@ -244,6 +251,7 @@ const app = {
         }
         this.loadCurrentSong();
     },
+
     prevSong: function () {
         this.currentIndex--
         if (this.currentIndex < 0) {
@@ -251,6 +259,7 @@ const app = {
         }
         this.loadCurrentSong();
     },
+
     playRandomSong: function () {
         let newIndex
         do {
@@ -278,7 +287,6 @@ const app = {
 
         randomBtn.classList.toggle("active", this.isRandom)
         repeatBtn.classList.toggle("active", this.isRepeat)
-
     }
 }
 

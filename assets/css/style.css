@@ -7,7 +7,7 @@
     padding: 0;
     margin: 0;
     box-sizing: inherit;
-    transition: all 0.1s ease;
+    transition: all 0.3s ease;
     /* scroll-behavior: smooth; */
 }
 
@@ -153,6 +153,7 @@ header h2 {
 .song.active {
     background-color: var(--primary-color);
 }
+
 
 .song:active {
     opacity: 0.8;
